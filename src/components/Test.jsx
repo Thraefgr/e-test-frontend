@@ -1,10 +1,10 @@
 import { Card, Col, Row } from "antd";
 
-export default function Test({test}) {
+export default function Test({test, onClick}) {
     const minutes = Math.floor(test.timeLimit/60);
     const seconds = test.timeLimit - minutes*60;
     return (
-        <Card hoverable title={test.name} style={{textAlign:"center", backgroundColor:"wheat"}}>
+        <Card hoverable onClick={onClick} title={test.name} style={{textAlign:"center", backgroundColor:"wheat"}}>
             <Row gutter={[16, 16]}>
                 <Col span={12}>
                     <Card type="inner" title="Subject">{test.subject}</Card>

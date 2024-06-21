@@ -3,6 +3,7 @@ import axios from "axios";
 import {LOCAL_URL} from "../../config.js";
 import Test from "../components/Test.jsx";
 import { Flex } from "antd";
+import PurchasePop from "../components/PurchasePop.jsx";
 
 
 export default function Tests() {
@@ -17,7 +18,7 @@ export default function Tests() {
 
     return (
         <Flex wrap={true} style={{minHeight: "100vh", padding:"1rem"}} justify="space-evenly" align="center" gap="1rem">
-            {tests.map(test => <Test key={test._id} test={test}/>)}
+            {tests.map(test => <PurchasePop key={test._id} testId={test._id} name={test.name} creator={test.creator}><Test test={test}/></PurchasePop>)}
         </Flex>
     )
 }
