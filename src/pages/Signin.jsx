@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import {LOCAL_URL} from "../../config.js";
 
 export default function Signin() {
-    const handleFinish = (e) => {
+    const handleFinish = (formData) => {
         message.loading("Trying to sign you in...")
-        axios.post(`${LOCAL_URL}/signin`, e)
+        axios.post(`${LOCAL_URL}/signin`, formData)
         .then(res => localStorage.setItem("user", JSON.stringify(res.data)))
         .then(() => {
             message.destroy()
@@ -19,8 +19,8 @@ export default function Signin() {
         });
     }
     return (
-        <Flex style={{height:"100vh"}} justify="center" align="center">
-            <Form onFinish={handleFinish}>
+        <Flex style={{height:"100vh", padding:"1rem"}} justify="center" align="center">
+            <Form onFinish={handleFinish} style={{width:"400px" ,maxWidth:"400px"}}>
                 <Form.Item name="username" rules={[{required:true, message:"Username is required!"}]}>
                     <Input prefix={<UserOutlined/>} placeholder="Username" />
                 </Form.Item>
