@@ -1,0 +1,64 @@
+import { Button, Card, Flex, Popover, Typography, message } from "antd";
+import dateConverter from "../lib/dateConverter.js";
+import { LOCAL_URL } from "../../config.js";
+import axios from "axios";
+
+export default function InventoryCard({test, own}) {
+    const {testId, finishDate, rightOnes, score} = test;
+    const {Title, Text} = Typography;
+    const minutes = Math.floor(testId.timeLimit/60);
+    const seconds = testId.timeLimit - minutes*60;
+    const token = JSON.parse(localStorage.getItem("user")).token;
+    const [setOwned] = own;
+    const handleRemove = () => {
+        message.loading("Removing the test from your account.")
+        axios.delete(`${LOCAL_URL}/inventory/${testId._id}`, {headers:{"Authorization":`Bearer ${token}`}})
+        .then(() => {
+            message.destroy()
+            message.success("Hey you no longer have this nasty, filthy test!")
+            setOwned(pre => {
+                return pre.filter(test => test.testId._id!==testId._id)
+            })
+            })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+
+    const content = (
+        <Card bordered={false} style={{maxWidth:"480px", gap:"4rem"}}>
+            <Title level={2}>Results</Title>
+            {
+                finishDate ?
+                <Flex vertical>
+                    <Text strong>Solved at: {dateConverter(finishDate)}</Text>
+                    <Text strong>Right Answers: {rightOnes}/{testId.queCount}</Text>
+                    <Text strong>Final Score: {score}</Text>
+                </Flex> :
+                <Flex vertical gap="1rem">
+                    <Text>Looks like you have not even solved it yet! Go head and solve it tiger!!</Text>
+                    <Button style={{backgroundColor:"green", color:"white"}}>Solve!</Button>
+                </Flex>
+            }
+            <Button onClick={handleRemove} style={{marginTop:"1rem", backgroundColor:"red", color:"white"}}>Remove this Test</Button>
+        </Card>
+    );
+
+
+    return (
+        <Popover trigger="click" content={content}>
+            <Card hoverable style={{width:"360px", maxWidth:"480px", backgroundColor:"cyan"}}>
+                <Flex vertical>
+                    <Title level={2}>{testId.name}</Title>
+                    <Text strong style={{fontSize:"1.25rem"}}>Subject: {testId.subject}</Text>
+                    <Text strong style={{fontSize:"1.25rem"}}>Number of Questions: {testId.queCount}</Text>
+                    <Text strong style={{fontSize:"1.25rem"}}>Estimated Difficulty: {testId.difficulty}</Text>
+                    <Text strong style={{fontSize:"1.25rem"}}>Time Limit: {minutes}m{seconds}s</Text>
+                    <Text style={{marginTop:"1rem"}}>Created by {testId.creator} at {testId.createdAt.slice(0, testId.createdAt.indexOf("T"))}</Text>
+                    <Text>Last updated at {testId.updatedAt.slice(0, testId.updatedAt.indexOf("T"))}</Text>
+                </Flex>
+            </Card>
+        </Popover>
+    )
+}
