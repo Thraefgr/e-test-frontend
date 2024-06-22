@@ -3,6 +3,7 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Tests from "./pages/Tests";
 import Inventory from "./pages/Inventory";
+import Exam from "./pages/Exam.jsx";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
     {
         path:"/inventory",
         element:<Inventory />
-    }
+    },
+    {
+        path:"/exam/:id",
+        element:<Exam/>
+    },
 ])
 
 export default router;
