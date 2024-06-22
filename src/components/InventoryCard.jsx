@@ -2,6 +2,7 @@ import { Button, Card, Flex, Popover, Typography, message } from "antd";
 import dateConverter from "../lib/dateConverter.js";
 import { LOCAL_URL } from "../../config.js";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function InventoryCard({test, own}) {
     const {testId, finishDate, rightOnes, score} = test;
@@ -38,7 +39,7 @@ export default function InventoryCard({test, own}) {
                 </Flex> :
                 <Flex vertical gap="1rem">
                     <Text>Looks like you have not even solved it yet! Go head and solve it tiger!!</Text>
-                    <Button style={{backgroundColor:"green", color:"white"}}>Solve!</Button>
+                    <Link to={`/exam/${testId._id}`}><Button style={{backgroundColor:"green", color:"white"}}>Solve!</Button></Link>
                 </Flex>
             }
             <Button onClick={handleRemove} style={{marginTop:"1rem", backgroundColor:"red", color:"white"}}>Remove this Test</Button>
