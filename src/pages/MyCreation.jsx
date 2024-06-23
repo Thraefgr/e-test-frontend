@@ -4,7 +4,7 @@ import { LOCAL_URL } from "../../config";
 import { useState } from "react";
 import { Flex, FloatButton } from "antd";
 import Test from "../components/Test";
-import { PlusCircleFilled, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 export default function MyCreation() {
@@ -15,11 +15,6 @@ export default function MyCreation() {
         .then(res => setTests(res.data))
         .catch(err=>console.log(err));
     }, [])
-
-
-
-
-
 
     return (
         <Flex wrap style={{padding:"1rem"}} justify="space-evenly" align="center">
