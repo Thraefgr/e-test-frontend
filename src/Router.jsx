@@ -4,6 +4,7 @@ import Signup from "./pages/Signup";
 import Tests from "./pages/Tests";
 import Inventory from "./pages/Inventory";
 import Exam from "./pages/Exam.jsx";
+import MyCreation from "./pages/MyCreation.jsx";
 
 const router = createBrowserRouter([
     {
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
     },
     {
         path:"/exam/:id",
-        element:<Exam/>
+        element:<Exam />
+    },
+    {
+        path:"/mycreation",
+        element:<MyCreation />
     },
 ])
 
