@@ -5,7 +5,7 @@ import Tests from "./pages/Tests";
 import Inventory from "./pages/Inventory";
 import Exam from "./pages/Exam.jsx";
 import MyCreation from "./pages/MyCreation.jsx";
-import NewCreation from "./pages/NewCreation.jsx";
+import  NewCreation from "./pages/NewCreation.jsx";
 
 const router = createBrowserRouter([
     {
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     },
     {
         path:"/mycreation/new",
-        element:<NewCreation />
+        element: <NewCreation />
     },
 ])
 

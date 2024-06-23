@@ -30,7 +30,6 @@ export default function MyCreation() {
 
 
 const Content = ({id, token, value}) => {
-
     const [tests, setTests] = value;
     const deleteCreation = () => {
         axios.delete(`${LOCAL_URL}/mycreation/${id}`, {headers:{"Authorization":`Bearer ${token}`}})
