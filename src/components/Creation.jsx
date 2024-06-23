@@ -1,16 +1,11 @@
 import TestCoverForm from "./TestCoverForm";
-import { Button, Flex, FloatButton, message } from "antd";
+import { Button, Flex,} from "antd";
 import { useState } from "react";
 import QuestionForm from "./QuestionForm";
 import ButtonGroup from "antd/es/button/button-group";
-import {DoubleRightOutlined, DoubleLeftOutlined, DeleteFilled, PlusCircleFilled, CheckOutlined} from "@ant-design/icons"
-import axios from "axios";
-import { LOCAL_URL } from "../../config"
-import { useNavigate } from "react-router-dom";
+import {DoubleRightOutlined, DoubleLeftOutlined, DeleteFilled, PlusCircleFilled} from "@ant-design/icons"
 
 export default function NewCreation({data}) {
-    const token = JSON.parse(localStorage.getItem("user")).token;
-    const navigate = useNavigate();
     const [test, setTest] = data;
 
     const [curIndex, setCurIndex] = useState(0);
@@ -53,16 +48,6 @@ export default function NewCreation({data}) {
         console.log(test)
     } 
 
-    async function createTest() {
-        test.queCount = test.questions.length;
-        axios.post(`${LOCAL_URL}/mycreation`, test, {headers:{"Authorization":`Bearer ${token}`}})
-        .then(() => {
-            message.success("Come on, checkout your new creation! It is so exciting!");
-            navigate("/mycreation")
-        })
-        .catch(()=>message.error("Fill all required fields!"))
-    }
-
     return (
         <Flex style={{minHeight:"100vh", padding:"2rem"}} gap="2rem">
             <TestCoverForm  value={[test, setTest]}/>
@@ -77,7 +62,7 @@ export default function NewCreation({data}) {
                     <Button size="large" style={{backgroundColor:"green", color:"white"}} onClick={addQuestion} icon={<PlusCircleFilled />}></Button>
                 </ButtonGroup>
             </Flex>
-            <FloatButton style={{right:"96px"}}onClick={createTest} icon={<CheckOutlined />}/>
+            
         </Flex>
     )
 }

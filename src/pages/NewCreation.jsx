@@ -1,7 +1,14 @@
 import { useState } from "react"
 import Creation from "../components/Creation.jsx"
+import axios from "axios";
+import { LOCAL_URL } from "../../config"
+import { FloatButton, message } from "antd";
+import { useNavigate } from "react-router-dom";
+import { CheckOutlined } from "@ant-design/icons";
 
 export default function NewCreation() {
+    const navigate = useNavigate();
+    const token = JSON.parse(localStorage.getItem("user")).token;
     const [test, setTest] = useState({
         name: "",
         subject:"",
@@ -19,8 +26,21 @@ export default function NewCreation() {
         ],
     })
 
+    async function createTest() {
+        test.queCount = test.questions.length;
+        axios.post(`${LOCAL_URL}/mycreation`, test, {headers:{"Authorization":`Bearer ${token}`}})
+        .then(() => {
+            message.success("Come on, checkout your new creation! It is so exciting!");
+            navigate("/mycreation")
+        })
+        .catch(()=>message.error("Fill all required fields!"))
+    }
+
     return (
-        <Creation data={[test, setTest]}/>
+        <>
+            <Creation data={[test, setTest]}/>
+            <FloatButton style={{right:"96px"}}onClick={createTest} icon={<CheckOutlined />}/>
+        </>
     )
 
 }

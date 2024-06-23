@@ -7,18 +7,18 @@ import { Link } from "react-router-dom";
 export default function InventoryCard({test, own}) {
     const {testId, finishDate, rightOnes, score} = test;
     const {Title, Text} = Typography;
-    const minutes = Math.floor(testId.timeLimit/60);
-    const seconds = testId.timeLimit - minutes*60;
+    const minutes = Math.floor(testId?.timeLimit/60);
+    const seconds = testId?.timeLimit - minutes*60;
     const token = JSON.parse(localStorage.getItem("user")).token;
     const [setOwned] = own;
     const handleRemove = () => {
         message.loading("Removing the test from your account.")
-        axios.delete(`${LOCAL_URL}/inventory/${testId._id}`, {headers:{"Authorization":`Bearer ${token}`}})
+        axios.delete(`${LOCAL_URL}/inventory/${testId?._id}`, {headers:{"Authorization":`Bearer ${token}`}})
         .then(() => {
             message.destroy()
             message.success("Hey you no longer have this nasty, filthy test!")
             setOwned(pre => {
-                return pre.filter(test => test.testId._id!==testId._id)
+                return pre.filter(test => test.testId._id!==testId?._id)
             })
             })
         .catch(err => {
@@ -34,12 +34,12 @@ export default function InventoryCard({test, own}) {
                 finishDate ?
                 <Flex vertical>
                     <Text strong>Solved at: {dateConverter(finishDate)}</Text>
-                    <Text strong>Right Answers: {rightOnes}/{testId.queCount}</Text>
+                    <Text strong>Right Answers: {rightOnes}/{testId?.queCount}</Text>
                     <Text strong>Final Score: {score}</Text>
                 </Flex> :
                 <Flex vertical gap="1rem">
                     <Text>Looks like you have not even solved it yet! Go head and solve it tiger!!</Text>
-                    <Link to={`/exam/${testId._id}`}><Button style={{backgroundColor:"green", color:"white"}}>Solve!</Button></Link>
+                    <Link to={`/exam/${testId?._id}`}><Button style={{backgroundColor:"green", color:"white"}}>Solve!</Button></Link>
                 </Flex>
             }
             <Button onClick={handleRemove} style={{marginTop:"1rem", backgroundColor:"red", color:"white"}}>Remove this Test</Button>
@@ -48,6 +48,7 @@ export default function InventoryCard({test, own}) {
 
 
     return (
+        testId ?
         <Popover trigger="click" content={content}>
             <Card hoverable style={{width:"360px", maxWidth:"480px", backgroundColor:"cyan"}}>
                 <Flex vertical>
@@ -60,6 +61,7 @@ export default function InventoryCard({test, own}) {
                     <Text>Last updated at {testId.updatedAt.slice(0, testId.updatedAt.indexOf("T"))}</Text>
                 </Flex>
             </Card>
-        </Popover>
+        </Popover> :
+        <></>
     )
 }
