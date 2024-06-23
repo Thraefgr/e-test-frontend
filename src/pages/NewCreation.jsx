@@ -1,29 +1,27 @@
 import TestCoverForm from "../components/TestCoverForm";
-import { Button, Flex } from "antd";
+import { Button, Flex, FloatButton, message } from "antd";
 import { useState } from "react";
 import QuestionForm from "../components/QuestionForm";
 import ButtonGroup from "antd/es/button/button-group";
-import {DoubleRightOutlined, DoubleLeftOutlined, PlusCircleOutlined, DeleteFilled} from "@ant-design/icons"
+import {DoubleRightOutlined, DoubleLeftOutlined, DeleteFilled, PlusCircleFilled, CheckOutlined} from "@ant-design/icons"
+import axios from "axios";
+import { LOCAL_URL } from "../../config"
+import { useNavigate } from "react-router-dom";
 
 export default function NewCreation() {
-
+    const token = JSON.parse(localStorage.getItem("user")).token;
+    const navigate = useNavigate();
     const[test, setTest] = useState({
         name: "",
         subject:"",
         difficulty:"",
         timeLimit: 60,
+        queCount: 0,
         questions:[
         {
-            question: "9x9",
-            choices: ["81", "45", "33"],
-            answer: "81",
-            points: 10,
-            choice: ""
-        },
-        {
-            question: "2",
-            choices: [2, "wasdasd", "abc"],
-            answer: "2",
+            question: "",
+            choices: [],
+            answer: "",
             points: 10,
             choice: ""
         }
@@ -68,6 +66,16 @@ export default function NewCreation() {
         setTest({...test, questions:[...test.questions, newq]})
     } 
 
+    async function createTest() {
+        test.queCount = test.questions.length;
+        axios.post(`${LOCAL_URL}/mycreation`, test, {headers:{"Authorization":`Bearer ${token}`}})
+        .then(() => {
+            message.success("Come on, checkout your new creation! It is so exciting!");
+            navigate("/mycreation")
+        })
+        .catch(()=>message.error("Fill all required fields!"))
+    }
+
     return (
         <Flex style={{minHeight:"100vh", padding:"2rem"}} gap="2rem">
             <TestCoverForm  value={[test, setTest]}/>
@@ -79,9 +87,10 @@ export default function NewCreation() {
                 </ButtonGroup>
                 <ButtonGroup>
                     <Button size="large" style={{backgroundColor:"red", color:"white"}} onClick={deleteQuestion} icon={<DeleteFilled />}></Button>
-                    <Button size="large" style={{backgroundColor:"green", color:"white"}} onClick={addQuestion} icon={<PlusCircleOutlined />}></Button>
+                    <Button size="large" style={{backgroundColor:"green", color:"white"}} onClick={addQuestion} icon={<PlusCircleFilled />}></Button>
                 </ButtonGroup>
             </Flex>
+            <FloatButton style={{right:"96px"}}onClick={createTest} icon={<CheckOutlined />}/>
         </Flex>
     )
 }

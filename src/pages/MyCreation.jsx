@@ -17,9 +17,9 @@ export default function MyCreation() {
     }, [])
 
     return (
-        <Flex wrap style={{padding:"1rem"}} justify="space-evenly" align="center">
+        <Flex wrap style={{padding:"1rem", gap:"1rem"}} justify="center" align="center">
             {tests.map(test => <Test key={test._id} test={test}/>)}
-            <Link to="/tests" title="Create a new test"><FloatButton type="primary" style={{right:"5%", color:"green"}}icon={<PlusOutlined style={{color:"white"}}/>} /></Link>
+            <Link to="/mycreation/new" title="Create a new test"><FloatButton type="primary" style={{right:"5%", color:"green"}}icon={<PlusOutlined style={{color:"white"}}/>} /></Link>
         </Flex>
     )
 }
