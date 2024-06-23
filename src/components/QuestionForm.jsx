@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber } from "antd";
+import { Form, Input, InputNumber, Flex } from "antd";
 
 export default function QuestionForm({value, index}) {
     const [test, setTest] = value;
@@ -28,10 +28,12 @@ export default function QuestionForm({value, index}) {
     }
     return (
         <Form >
-            <Input addonBefore="Question" onChange={handleQuChange} size="large" value={test.questions[curIndex].question} required/>
-            <Input addonBefore="Choices" onChange={handleCsChange} size="large" value={test.questions[curIndex].choices.join("__")} required/>
-            <Input addonBefore="Answer" onChange={handleAnswerChange} size="large" value={test.questions[curIndex].answer} required/>
-            <InputNumber addonBefore="Points" onChange={handlePointChange} min={1} size="large" value={test.questions[curIndex].points} required/>
+            <Flex wrap gap="1rem">
+                <Input addonBefore="Question" onChange={handleQuChange} size="large" value={test.questions[curIndex].question} required/>
+                <Input addonBefore="Choices" onChange={handleCsChange} size="large" value={test.questions[curIndex].choices.join("__")} required/>
+                <Input addonBefore="Answer" onChange={handleAnswerChange} size="large" value={test.questions[curIndex].answer} required/>
+                <InputNumber addonBefore="Points" onChange={handlePointChange} min={1} size="large" value={test.questions[curIndex].points} required/>  
+            </Flex>
         </Form>
     )
 }
