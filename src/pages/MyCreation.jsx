@@ -1,10 +1,9 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { LOCAL_URL } from "../../config";
-import { useState } from "react";
-import { Flex, FloatButton } from "antd";
+import { Button, Flex, FloatButton, Popover, message } from "antd";
 import Test from "../components/Test";
-import { PlusOutlined } from "@ant-design/icons";
+import { DeleteFilled, EditFilled, PlusOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 export default function MyCreation() {
@@ -14,12 +13,39 @@ export default function MyCreation() {
         axios.get(`${LOCAL_URL}/mycreation`, {headers:{"Authorization":`Bearer ${token}`}})
         .then(res => setTests(res.data))
         .catch(err=>console.log(err));
-    }, [])
+    }, [token])
 
     return (
         <Flex wrap style={{padding:"1rem", gap:"1rem"}} justify="center" align="center">
-            {tests.map(test => <Test key={test._id} test={test}/>)}
+            {tests.map(test => {
+                return <Popover trigger="click" content={()=> <Content id={test._id} token={token} value={[tests, setTests]}/>} key={test._id}>
+                            <Test test={test}/>
+                        </Popover>
+                        }
+            )}
             <Link to="/mycreation/new" title="Create a new test"><FloatButton type="primary" style={{right:"5%", color:"green"}}icon={<PlusOutlined style={{color:"white"}}/>} /></Link>
         </Flex>
     )
 }
+
+
+const Content = ({id, token, value}) => {
+
+    const [tests, setTests] = value;
+    const deleteCreation = () => {
+        axios.delete(`${LOCAL_URL}/mycreation/${id}`, {headers:{"Authorization":`Bearer ${token}`}})
+        .then(()=> {
+            message.success("You have successfully deleted that nasty, filthy test!")
+            const filtered = tests.filter(test => id!==test._id)
+            setTests([...filtered])
+        }).catch(err => console.log(err))
+    }
+
+
+    return (
+        <Button.Group>
+            <Button onClick={deleteCreation} icon={<DeleteFilled />}>Delete</Button>
+            <Link to={`/mycreation/${id}`}><Button icon={<EditFilled />}>Edit</Button></Link>
+        </Button.Group>
+    )
+}   
