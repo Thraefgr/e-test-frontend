@@ -11,8 +11,8 @@ export default function UpdateCreation() {
     useEffect(() => {
         axios.get(`${LOCAL_URL}/mycreation/${id}`, {headers:{"Authorization":`Bearer ${token}`}})
         .then(res => setTest(res.data))
-    })
+    }, [])
     return (
-        test ? <Creation data={[test, setTest]} /> : <h1>Hell0</h1>
+        test ? <Creation data={[test, setTest]} /> : <h1></h1>
     )
 }

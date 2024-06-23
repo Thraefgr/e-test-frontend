@@ -16,17 +16,17 @@ export default function TestCoverForm({value}) {
     }
     return (
         <Card style={{width:"50%"}}>
-            <Form style={{scale:"1"}}>
-                <Form.Item name="name" label="Title" required>
+            <Form>
+                <Form.Item name="name" label="Title" required initialValue={test.name}>
                     <Input size="large" onChange={handleNameChange} value={test.name}/>
                 </Form.Item>
-                <Form.Item name="subject" label="Subject" required>
+                <Form.Item name="subject" label="Subject" required initialValue={test.subject}>
                     <Select size="large" onChange={handleSubjectChange} value={test.subject} options={subjects.toSorted((a,b)=>a.value.localeCompare(b.value))}/>
                 </Form.Item>
-                <Form.Item name="difficulty" label="Estimated Difficulty" required>
+                <Form.Item name="difficulty" label="Estimated Difficulty" required initialValue={test.difficulty}>
                     <Select size="large" onChange={handleDiffChange} options={[{value:"Very Easy"}, {value:"Easy"}, {value:"Medium"},  {value:"Hard"}, {value:"Very Hard"}]}/>
                 </Form.Item>
-                <Form.Item name="timeLimit" label="Time Limit(minutes)" required>
+                <Form.Item name="timeLimit" label="Time Limit(minutes)" required initialValue={test.timeLimit}>
                     <InputNumber size="large" onChange={handleTimeChange} value={test.timeLimit} min={1}/>
                 </Form.Item>
                 <Form.Item name="queCount" label="Number of Questions" required>

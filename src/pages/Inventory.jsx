@@ -12,7 +12,7 @@ export default function Inventory() {
         axios.get(`${LOCAL_URL}/inventory`, {headers:{"Authorization":`Bearer ${token}`}})
         .then(res => setOwned(res.data))
         .catch(err => console.log(err))
-    }, [])
+    }, [token])
 
     return (
         <Flex wrap gap="1rem" style={{padding:"1rem"}} justify="center">

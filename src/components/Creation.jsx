@@ -50,6 +50,7 @@ export default function NewCreation({data}) {
             choice: ""
         }
         setTest({...test, questions:[...test.questions, newq]})
+        console.log(test)
     } 
 
     async function createTest() {
