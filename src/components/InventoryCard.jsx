@@ -3,13 +3,16 @@ import dateConverter from "../lib/dateConverter.js";
 import { LOCAL_URL } from "../../config.js";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../App.jsx";
 
 export default function InventoryCard({test, own}) {
     const {testId, finishDate, rightOnes, score} = test;
     const {Title, Text} = Typography;
     const minutes = Math.floor(testId?.timeLimit/60);
     const seconds = testId?.timeLimit - minutes*60;
-    const token = JSON.parse(localStorage.getItem("user")).token;
+    const [creds] = useContext(Context)
+    const token = creds.token;
     const [setOwned] = own;
     const handleRemove = () => {
         message.loading("Removing the test from your account.")

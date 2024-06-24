@@ -1,13 +1,15 @@
 
 import { Button, Flex, Popover, Typography, message } from "antd";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { LOCAL_URL } from "../../config";
+import { Context } from "../App";
 
 
 export default function PurchasePop({children, name, creator, testId}) {
     const [open, setOpen] = useState(false);
-    const token = JSON.parse(localStorage.getItem("user")).token;
+    const [creds] = useContext(Context)
+    const token = creds.token;
     const handleOpen = (newOpen) => {
         setOpen(newOpen)
     }

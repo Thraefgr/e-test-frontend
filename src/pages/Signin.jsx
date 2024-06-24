@@ -1,14 +1,22 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Flex, Form, Input, message} from "antd";
+import { Button, Flex, Form, Input, Typography, message} from "antd";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {LOCAL_URL} from "../../config.js";
+import { useContext } from "react";
+import { Context } from "../App.jsx";
 
 export default function Signin() {
+    const [creds, setCreds] = useContext(Context);
+    const nav = useNavigate();
     const handleFinish = (formData) => {
         message.loading("Trying to sign you in...")
         axios.post(`${LOCAL_URL}/signin`, formData)
-        .then(res => localStorage.setItem("user", JSON.stringify(res.data)))
+        .then(res => {
+            localStorage.setItem("credentials", JSON.stringify(res.data));
+            setCreds(JSON.parse(localStorage.getItem("credentials")));
+            nav("/profile");
+        })
         .then(() => {
             message.destroy()
             message.success("You are signed in. Now go solve some tests, tiger!!")
@@ -19,7 +27,8 @@ export default function Signin() {
         });
     }
     return (
-        <Flex style={{height:"100vh", padding:"1rem"}} justify="center" align="center">
+        <Flex style={{height:"90vh", padding:"1rem"}} justify="center" align="center" vertical>
+            <Typography.Title>Sign In</Typography.Title>
             <Form onFinish={handleFinish} style={{width:"400px" ,maxWidth:"400px"}}>
                 <Form.Item name="username" rules={[{required:true, message:"Username is required!"}]}>
                     <Input prefix={<UserOutlined/>} placeholder="Username" />

@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom"
 import { LOCAL_URL } from "../../config";
 import Question from "../components/Question.jsx";
 import { Flex, Typography, message } from "antd";
+import { Context } from "../App.jsx";
 
 export default function Exam() {
     const {id} = useParams();
@@ -11,7 +12,8 @@ export default function Exam() {
     const [currIndex, setCurrIndex] = useState(0);
     const [time, setTime] = useState(0)
     const minutes = `${Math.floor(time/60)}m${time-Math.floor(time/60)*60}s`;
-    const token = JSON.parse(localStorage.getItem("user")).token;
+    const [creds] = useContext(Context)
+    const token = creds.token;
     useEffect(() => {
         axios.get(`${LOCAL_URL}/exam/${id}`, {headers:{"Authorization":`Bearer ${token}`}})
         .then(res => {

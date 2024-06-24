@@ -1,5 +1,5 @@
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Flex, Form, Input, Select, message} from "antd";
+import { Button, Flex, Form, Input, Select, Typography, message} from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {LOCAL_URL} from "../../config.js";
@@ -18,7 +18,8 @@ export default function Signup() {
         })
     }
     return (
-        <Flex style={{height:"100vh"}} justify="center" align="center">
+        <Flex style={{height:"90vh"}} justify="center" align="center" vertical>
+            <Typography.Title>Sign Up</Typography.Title>
             <Form onFinish={handleFinish} style={{width:"400px" ,maxWidth:"400px"}}>
                 <Form.Item name="email" rules={[{required:true, message:"Email is required!"}]}>
                     <Input type="email" prefix={<MailOutlined />} placeholder="Email"/>

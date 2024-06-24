@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import {LOCAL_URL} from "../../config.js";
 import Test from "../components/Test.jsx";
 import { Flex } from "antd";
 import PurchasePop from "../components/PurchasePop.jsx";
+import { Context } from "../App.jsx";
 
 
 export default function Tests() {
+    const [creds] = useContext(Context)
+    const token = creds.token;
     const [tests, setTests] = useState([]);
-    const token = JSON.parse(localStorage.getItem("user")).token;
-
     useEffect(() => {
         axios.get(`${LOCAL_URL}/tests`, {headers:{"Authorization": `Bearer ${token}`}})
         .then(res => setTests(res.data))

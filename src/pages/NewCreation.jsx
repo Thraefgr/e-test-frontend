@@ -1,14 +1,16 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Creation from "../components/Creation.jsx"
 import axios from "axios";
 import { LOCAL_URL } from "../../config"
 import { FloatButton, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
+import { Context } from "../App.jsx";
 
 export default function NewCreation() {
     const navigate = useNavigate();
-    const token = JSON.parse(localStorage.getItem("user")).token;
+    const [creds] = useContext(Context)
+    const token = creds.token;
     const [test, setTest] = useState({
         name: "",
         subject:"",

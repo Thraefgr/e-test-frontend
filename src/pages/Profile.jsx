@@ -1,12 +1,14 @@
-import {Card, Col, Input, Row, Typography, Flex, Form, DatePicker, FloatButton, message} from "antd"
+import {Card, Input, Typography, Flex, Form, FloatButton, message} from "antd"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { LOCAL_URL } from "../../config"
 import { DeleteOutlined, SaveOutlined} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../App";
 
 export default function Profile() {
-    const token = JSON.parse(localStorage.getItem("user")).token;
+    const [creds] = useContext(Context)
+    const token = creds.token;
     const [profile, setProfile] = useState({})
     const nav = useNavigate();
     const handleNameChange = (e) => {

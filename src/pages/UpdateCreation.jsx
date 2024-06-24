@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { LOCAL_URL } from "../../config";
 import axios from "axios";
 import Creation from "../components/Creation.jsx";
 import { FloatButton, message } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
+import { Context } from "../App.jsx";
 
 export default function UpdateCreation() {
-    const token = JSON.parse(localStorage.getItem("user")).token;
+    const [creds] = useContext(Context)
+    const token = creds.token;
     const {id} = useParams();
     const [test, setTest] = useState();
     useEffect(() => {

@@ -2,12 +2,15 @@ import { DoubleRightOutlined } from "@ant-design/icons";
 import {Button, Card, Form, Radio, Typography, message} from "antd"
 import { LOCAL_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../App";
+import { useContext } from "react";
 
 export default function Question({question, index, test, postResult}) {
     const {Title} = Typography;
     const [currIndex, setCurrIndex] = index;
     const [testy] = test;
-    const token = JSON.parse(localStorage.getItem("user")).token;
+    const [creds] = useContext(Context)
+    const token = creds.token;
     const navigate = useNavigate()
     console.log(currIndex)
     const handleFinish = (e) => {

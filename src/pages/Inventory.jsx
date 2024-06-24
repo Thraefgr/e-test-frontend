@@ -1,11 +1,13 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { LOCAL_URL } from "../../config"
 import { Flex } from "antd";
 import InventoryCard from "../components/InventoryCard";
+import { Context } from "../App";
 
 export default function Inventory() {
-    const token = JSON.parse(localStorage.getItem("user")).token;
+    const [creds] = useContext(Context)
+    const token = creds.token;
     const [owned, setOwned] = useState([]);
 
     useEffect(() => {

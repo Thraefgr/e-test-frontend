@@ -1,14 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LOCAL_URL } from "../../config";
 import { Button, Flex, FloatButton, Popover, message } from "antd";
 import Test from "../components/Test";
 import { DeleteFilled, EditFilled, PlusOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { Context } from "../App";
 
 export default function MyCreation() {
     const [tests, setTests] = useState([]);
-    const token = JSON.parse(localStorage.getItem("user")).token;
+    const [creds] = useContext(Context)
+    const token = creds.token;
     useEffect(() => {
         axios.get(`${LOCAL_URL}/mycreation`, {headers:{"Authorization":`Bearer ${token}`}})
         .then(res => setTests(res.data))
