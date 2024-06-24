@@ -49,7 +49,7 @@ export default function NewCreation({data}) {
     } 
 
     return (
-        <Flex style={{minHeight:"100vh", padding:"2rem"}} gap="2rem">
+        <Flex style={{minHeight:"calc(100vh - 64px)", padding:"2rem"}} gap="2rem">
             <TestCoverForm  value={[test, setTest]}/>
             <Flex vertical gap={2}>
                 <QuestionForm value={[test, setTest]} index={[curIndex, setCurIndex]}/>

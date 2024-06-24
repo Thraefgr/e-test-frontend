@@ -21,7 +21,7 @@ export default function InventoryCard({test, own}) {
             message.destroy()
             message.success("Hey you no longer have this nasty, filthy test!")
             setOwned(pre => {
-                return pre.filter(test => test.testId._id!==testId?._id)
+                return pre.filter(test => test?.testId?._id!==testId?._id)
             })
             })
         .catch(err => {

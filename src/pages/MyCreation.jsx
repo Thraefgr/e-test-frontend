@@ -18,7 +18,7 @@ export default function MyCreation() {
     }, [token])
 
     return (
-        <Flex wrap style={{padding:"1rem", gap:"1rem"}} justify="center" align="center">
+        <Flex wrap style={{padding:"1rem", gap:"1rem", minHeight:"calc(100vh - 64px)"}} justify="center" align="center">
             {tests.map(test => {
                 return <Popover trigger="click" content={()=> <Content id={test._id} token={token} value={[tests, setTests]}/>} key={test._id}>
                             <Test test={test}/>

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../App";
 
 export default function Profile() {
-    const [creds] = useContext(Context)
+    const [creds, setCreds] = useContext(Context)
     const token = creds.token;
     const [profile, setProfile] = useState({})
     const nav = useNavigate();
@@ -42,6 +42,7 @@ export default function Profile() {
         .then(()=>{
             message.success("You profile... is gone. Forever.")
             localStorage.clear()
+            setCreds(null)
             nav("/")
         })
     }
@@ -53,8 +54,8 @@ export default function Profile() {
         .then(res => {setProfile(res.data);console.log(res)})
     }, [])
     return (
-        <Flex justify="center" align="center" style={{minHeight:"90vh", padding:"1rem"}}>
-            <Card title={<Typography.Title>Profile</Typography.Title>} style={{minWidth:"50%", padding:"1rem"}}>
+        <Flex justify="center" align="center" style={{minHeight:"calc(100vh - 64px)", padding:"1rem"}}>
+            <Card title={<Typography.Title style={{textAlign:"center"}}>Profile</Typography.Title>} style={{minWidth:"50%", padding:"1rem"}}>
                 <Form>
                         <Flex align="center" wrap>
                             <Typography.Text style={{fontSize:"2rem"}}>Username:</Typography.Text>

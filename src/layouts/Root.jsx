@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import { Layout } from "antd";
+import MyHeader from "../components/Header";
 
 export default function Root() {
     return (
-        <>
-            <Navbar />
-            <Outlet />
-        </>
+        <Layout>
+            <MyHeader />
+            <Layout.Content>
+                <Outlet />
+            </Layout.Content>
+        </Layout>
     )
 }

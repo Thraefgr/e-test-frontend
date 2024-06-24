@@ -18,7 +18,7 @@ export default function Tests() {
     }, [])
 
     return (
-        <Flex wrap={true} style={{minHeight: "100vh", padding:"1rem"}} justify="space-evenly" align="center" gap="1rem">
+        <Flex wrap={true} style={{minHeight: "calc(100vh - 64px)", padding:"1rem"}} justify="space-evenly" align="center" gap="1rem">
             {tests.map(test => <PurchasePop key={test._id} testId={test._id} name={test.name} creator={test.creator}><Test test={test}/></PurchasePop>)}
         </Flex>
     )

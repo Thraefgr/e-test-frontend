@@ -17,7 +17,7 @@ export default function Inventory() {
     }, [token])
 
     return (
-        <Flex wrap gap="1rem" style={{padding:"1rem"}} justify="center">
+        <Flex wrap gap="1rem" style={{padding:"1rem", minHeight:"100vh"}} justify="center">
             {owned?.map(test => <InventoryCard key={test?.testId?._id} test={test} own={[setOwned]}/>)}
         </Flex>
     )
