@@ -1,5 +1,9 @@
+import { Flex } from "antd";
+
 export default function Home() {
     return (
-        <h1>Hey</h1>
+        <Flex style={{minHeight:"calc(100vh - 64px)"}}>
+            <h1>Hey</h1>
+        </Flex>
     )
 }
