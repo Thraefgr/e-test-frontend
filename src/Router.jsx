@@ -9,6 +9,7 @@ import  NewCreation from "./pages/NewCreation.jsx";
 import UpdateCreation from "./pages/UpdateCreation.jsx";
 import Root from "./layouts/Root.jsx";
 import Home from "./pages/Home.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             {
                 path:"/mycreation/:id",
                 element: <UpdateCreation />
+            },
+            {
+                path:"/profile",
+                element: <Profile />
             },
         ], 
     }
