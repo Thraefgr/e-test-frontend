@@ -18,9 +18,11 @@ export default function Question({question, index, test, postResult}) {
         if (currIndex === testy.questions.length-1) {
             message.loading("Uploading your answers...");
             postResult(`${LOCAL_URL}/exam/${testy._id}`, testy, token)
-            message.destroy()
-            message.success("You have conquered the test! Now take a break.")
-            navigate("/inventory")
+            .then(() => {
+                message.destroy()
+                message.success("You have conquered the test! Now take a break.")
+                navigate("/inventory")
+            })
         } else {
             setCurrIndex(prev => ++prev)
         }

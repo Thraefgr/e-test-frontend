@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { LOCAL_URL } from "../../config";
 import Question from "../components/Question.jsx";
 import { Flex, Typography, message } from "antd";
@@ -14,6 +14,7 @@ export default function Exam() {
     const minutes = `${Math.floor(time/60)}m${time-Math.floor(time/60)*60}s`;
     const [creds] = useContext(Context)
     const token = creds.token;
+    const nav = useNavigate()
     useEffect(() => {
         axios.get(`${LOCAL_URL}/exam/${id}`, {headers:{"Authorization":`Bearer ${token}`}})
         .then(res => {
@@ -30,10 +31,12 @@ export default function Exam() {
 
     if(time <= -1){
         message.loading("Uploading your answers...");
-        postResult(`${LOCAL_URL}/exam/${id}`, test, token)
-        message.destroy()
-        message.success("You have conquered the test! Now take a break.")
-        return <Navigate to="/inventory"></Navigate>
+        postResult(`${LOCAL_URL}/exam/${id}`, test, token).
+        then(() => {
+            message.destroy()
+            message.success("You have conquered the test! Now take a break.")
+            nav("/inventory")
+        })
     }
     return (
         <Flex vertical style={{minHeight:"100vh"}} justify="center" align="center" gap="2rem">
