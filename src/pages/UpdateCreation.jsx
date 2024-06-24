@@ -4,7 +4,7 @@ import { LOCAL_URL } from "../../config";
 import axios from "axios";
 import Creation from "../components/Creation.jsx";
 import { FloatButton, message } from "antd";
-import { SaveFilled, SaveOutlined } from "@ant-design/icons";
+import { SaveOutlined } from "@ant-design/icons";
 
 export default function UpdateCreation() {
     const token = JSON.parse(localStorage.getItem("user")).token;
