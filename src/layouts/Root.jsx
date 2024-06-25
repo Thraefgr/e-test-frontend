@@ -6,7 +6,7 @@ export default function Root() {
     return (
         <Layout>
             <MyHeader />
-            <Layout.Content>
+            <Layout.Content style={{backgroundColor:"#eee"}}>
                 <Outlet />
             </Layout.Content>
         </Layout>
