@@ -27,7 +27,10 @@ export default function Exam() {
                 setTime(pre => --pre)
             },1000)
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            message.error(err.response.data.error)
+            nav("/inventory")
+        })
     }, [id, token])
 
     if(time <= -1){
