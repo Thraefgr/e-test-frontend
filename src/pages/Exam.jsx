@@ -15,19 +15,20 @@ export default function Exam() {
     const [creds] = useContext(Context)
     const token = creds.token;
     const nav = useNavigate()
+
     useEffect(() => {
         axios.get(`${LOCAL_URL}/exam/${id}`, {headers:{"Authorization":`Bearer ${token}`}})
         .then(res => {
             setTest(res.data);
             setTime(res.data.timeLimit)
         })
+        .then(() => {
+            setInterval(()=>{
+                setTime(pre => --pre)
+            },1000)
+        })
         .catch(err => console.log(err))
     }, [id, token])
-    useEffect(()=>{
-        setInterval(()=>{
-            setTime(pre => --pre)
-        },1000)
-    }, [])
 
     if(time <= -1){
         message.loading("Uploading your answers...");
@@ -38,6 +39,7 @@ export default function Exam() {
             nav("/inventory")
         })
     }
+    
     return (
         <Flex vertical style={{minHeight:"100vh"}} justify="center" align="center" gap="2rem">
                 <Flex wrap justify="space-between" align="center"style={{width:"60%", minWidth:"400px"}}>
