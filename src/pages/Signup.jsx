@@ -1,10 +1,16 @@
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Flex, Form, Input, Select, Typography, message} from "antd";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import {LOCAL_URL} from "../../config.js";
+import { useContext } from "react";
+import { Context } from "../App.jsx";
 
 export default function Signup() {
+    const [creds] = useContext(Context);
+    if (creds) {
+        return <Navigate to="/profile"/>
+    }
     const handleFinish = (formData) => {
         message.loading("Trying to sign you up...")
         axios.post(`${LOCAL_URL}/signup`, formData)

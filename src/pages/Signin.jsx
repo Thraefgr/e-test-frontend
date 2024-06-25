@@ -1,7 +1,7 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Flex, Form, Input, Typography, message} from "antd";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import {LOCAL_URL} from "../../config.js";
 import { useContext } from "react";
 import { Context } from "../App.jsx";
@@ -9,6 +9,9 @@ import { Context } from "../App.jsx";
 export default function Signin() {
     const [creds, setCreds] = useContext(Context);
     const nav = useNavigate();
+    if (creds) {
+        return <Navigate to="/profile"/>
+    }
     const handleFinish = (formData) => {
         message.loading("Trying to sign you in...")
         axios.post(`${LOCAL_URL}/signin`, formData)
