@@ -18,7 +18,7 @@ export default function MyHeader() {
                 {creds && <Item key="folder" icon={<FolderOutlined />}><Link to="/inventory">Folder</Link></Item>}
                 {creds?.role ==="teacher" && <Item key="mycreation" icon={<FileDoneOutlined />}><Link to="/mycreation">My Creation</Link></Item>}
                 {creds && <Item key="profile" icon={<UserOutlined />}><Link to="/profile">Profile</Link></Item>}
-                {!creds && <Item key="signin" icon={<LoginOutlined />}><Link to="/signin">Sign in</Link></Item>}
+                {!creds && <Item key="signin" icon={<LoginOutlined />}><Link to="/signin">Sign In</Link></Item>}
             </Menu>
         </Header>
     )
