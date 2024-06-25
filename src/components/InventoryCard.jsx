@@ -53,7 +53,7 @@ export default function InventoryCard({test, own}) {
     return (
         testId ?
         <Popover trigger="click" content={content}>
-            <Card hoverable style={{width:"360px", maxWidth:"480px", backgroundColor:"cyan"}}>
+            <Card hoverable style={{width:"360px", maxWidth:"480px", backgroundColor:"wheat", height:"fit-content", opacity:`${finishDate && 0.5}`}}>
                 <Flex vertical>
                     <Title level={2}>{testId.name}</Title>
                     <Text strong style={{fontSize:"1.25rem"}}>Subject: {testId.subject}</Text>
