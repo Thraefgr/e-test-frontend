@@ -2,7 +2,7 @@ import {Card, Input, Typography, Flex, Form, FloatButton, message} from "antd"
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import { LOCAL_URL } from "../../config"
-import { DeleteOutlined, SaveOutlined} from "@ant-design/icons";
+import { DeleteOutlined, LogoutOutlined, SaveOutlined} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../App";
 
@@ -45,6 +45,12 @@ export default function Profile() {
             setCreds(null)
             nav("/")
         })
+    }
+
+    const signOut = () => {
+        localStorage.clear();
+        nav("/");
+        setCreds(null);
     }
 
 
@@ -91,8 +97,9 @@ export default function Profile() {
                         </Flex>
                 </Form>
             </Card>
-            <FloatButton onClick={updateProfile} tooltip="Update your profile" style={{right:"160px"}} icon={<SaveOutlined />}>Hey</FloatButton>
-            <FloatButton onClick={deleteProfile} tooltip="Delete your profile" icon={<DeleteOutlined />} style={{right:"80px"}}>Hey</FloatButton>
+            <FloatButton onClick={updateProfile} tooltip="Update your profile" style={{right:"15%"}} icon={<SaveOutlined />}>Hey</FloatButton>
+            <FloatButton onClick={deleteProfile} tooltip="Delete your profile" icon={<DeleteOutlined />} style={{right:"10%"}}>Hey</FloatButton>
+            <FloatButton onClick={signOut} tooltip="Sign out" icon={<LogoutOutlined />} style={{right:"5%"}}>Hey</FloatButton>
         </Flex>
     )
 }
