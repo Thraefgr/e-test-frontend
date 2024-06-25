@@ -18,7 +18,7 @@ export default function Inventory() {
 
     return (
         <Flex wrap gap="1rem" style={{padding:"1rem"}}>
-            {owned?.map(test => <InventoryCard key={test?.testId?._id} test={test} own={[setOwned]}/>)}
+            {owned?.map((test, i) => <InventoryCard key={i} test={test} own={[setOwned]}/>)}
         </Flex>
     )
 }
