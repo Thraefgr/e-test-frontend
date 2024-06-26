@@ -6,7 +6,6 @@ export default function QuestionForm({value, index}) {
 
     const handleQuChange = (e) => {
         test.questions[curIndex].question = e.target.value;
-        test.totalPoints = test.questions.reduce((acc, question) => question.points + acc, 0);
         setTest({...test});
     }
     const handleCsChange = (e) => {

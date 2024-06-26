@@ -10,6 +10,7 @@ import UpdateCreation from "./pages/UpdateCreation.jsx";
 import Root from "./layouts/Root.jsx";
 import Home from "./pages/Home.jsx";
 import Profile from "./pages/Profile.jsx";
+import Auth from "./pages/Auth.jsx";
 
 const router = createBrowserRouter([
     {
@@ -30,31 +31,35 @@ const router = createBrowserRouter([
             },
             {
                 path:"/tests",
-                element:<Tests />
+                element:<Auth><Tests /></Auth>
             },
             {
                 path:"/inventory",
-                element:<Inventory />
+                element:<Auth><Inventory /></Auth>
             },
             {
                 path:"/exam/:id",
-                element:<Exam />
+                element:<Auth><Exam /></Auth>
             },
             {
                 path:"/mycreation",
-                element:<MyCreation />
+                element:<Auth access={["teacher"]}><MyCreation /></Auth>
             },
             {
                 path:"/mycreation/new",
-                element: <NewCreation />
+                element: <Auth access={["teacher"]}><NewCreation /></Auth>
             },
             {
                 path:"/mycreation/:id",
-                element: <UpdateCreation />
+                element: <Auth access={["teacher"]}><UpdateCreation /></Auth>
             },
             {
                 path:"/profile",
-                element: <Profile />
+                element: <Auth><Profile /></Auth>
+            },
+            {
+                path:"*",
+                element: <h1>Looks like you are lost buddy. Just click Home button and you will be on your way.</h1>
             },
         ], 
     }

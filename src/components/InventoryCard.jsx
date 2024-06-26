@@ -31,17 +31,17 @@ export default function InventoryCard({test, own}) {
 
 
     const content = (
-        <Card bordered={false} style={{maxWidth:"480px", gap:"4rem"}}>
+        <Card bordered={false} style={{width:"320px", gap:"4rem"}}>
             <Title level={2}>Results</Title>
             {
                 finishDate ?
                 <Flex vertical gap="1rem">
-                    <Text strong>Solved at: {dateConverter(finishDate)}</Text>
-                    <Text strong>Right Answers: {rightOnes} / {testId?.queCount}</Text>
-                    <Text strong>Final Score: {score} / {testId?.totalPoints}</Text>
+                    <Text strong style={{fontSize:"1.2rem"}}>Solved at: {dateConverter(finishDate)}</Text>
+                    <Text strong style={{fontSize:"1.2rem"}}>Right Answers: {rightOnes} / {testId?.queCount}</Text>
+                    <Text strong style={{fontSize:"1.2rem"}}>Final Score: {score} / {testId?.totalPoints}</Text>
                 </Flex> :
                 <Flex vertical gap="1rem">
-                    <Text>Looks like you have not even solved it yet! Go head and solve it tiger!!</Text>
+                    <Text strong>Looks like you have not even solved it yet! Go head and solve it tiger!!</Text>
                     <Link to={`/exam/${testId?._id}`}><Button style={{backgroundColor:"green", color:"white"}}>Solve!</Button></Link>
                 </Flex>
             }
@@ -53,7 +53,7 @@ export default function InventoryCard({test, own}) {
     return (
         testId ?
         <Popover trigger="click" content={content}>
-            <Card hoverable style={{width:"360px", maxWidth:"480px", backgroundColor:"wheat", height:"fit-content", opacity:`${finishDate && 0.5}`}}>
+            <Card hoverable style={{width:"400px", maxWidth:"480px", backgroundColor:"wheat", height:"fit-content", opacity:`${finishDate && 0.5}`}}>
                 <Flex vertical>
                     <Title level={2}>{testId.name}</Title>
                     <Text strong style={{fontSize:"1.25rem"}}>Subject: {testId.subject}</Text>
