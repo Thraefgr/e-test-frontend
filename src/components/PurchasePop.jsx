@@ -6,9 +6,10 @@ import { LOCAL_URL } from "../../config";
 import { Context } from "../App";
 
 
-export default function PurchasePop({children, name, creator, testId}) {
+export default function PurchasePop({children, name, creator, testId, value}) {
     const [open, setOpen] = useState(false);
     const [creds] = useContext(Context)
+    const [tests, setTests] = value
     const token = creds.token;
     const handleOpen = (newOpen) => {
         setOpen(newOpen)
@@ -22,6 +23,8 @@ export default function PurchasePop({children, name, creator, testId}) {
         .then(() => {
             message.destroy();
             message.success("Go on tiger! Solve them all!!");
+            const filtered = tests.filter(test => test._id !== testId);
+            setTests(filtered);
         })
         .catch(() => {
             message.destroy();

@@ -15,11 +15,11 @@ export default function Tests() {
         axios.get(`${LOCAL_URL}/tests`, {headers:{"Authorization": `Bearer ${token}`}})
         .then(res => setTests(res.data))
         .catch(err => console.log(err));
-    }, [])
+    }, [token])
 
     return (
         <Flex wrap={true} style={{minHeight: "calc(100vh - 64px)", padding:"1rem"}} justify="space-evenly" align="center" gap="1rem">
-            {tests.map(test => <PurchasePop key={test._id} testId={test._id} name={test.name} creator={test.creator}><Test test={test}/></PurchasePop>)}
+            {tests.map(test => <PurchasePop key={test._id} testId={test._id} name={test.name} creator={test.creator} value={[tests, setTests]}><Test test={test}/></PurchasePop>)}
         </Flex>
     )
 }
