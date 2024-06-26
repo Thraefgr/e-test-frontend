@@ -26,7 +26,7 @@ export default function TestCoverForm({value}) {
                 <Form.Item name="difficulty" label="Estimated Difficulty" required initialValue={test.difficulty}>
                     <Select size="large" onChange={handleDiffChange} options={[{value:"Very Easy"}, {value:"Easy"}, {value:"Medium"},  {value:"Hard"}, {value:"Very Hard"}]}/>
                 </Form.Item>
-                <Form.Item name="timeLimit" label="Time Limit(minutes)" required initialValue={test.timeLimit}>
+                <Form.Item name="timeLimit" label="Time Limit(minutes)" required initialValue={test.timeLimit/60}>
                     <InputNumber size="large" onChange={handleTimeChange} value={test.timeLimit} min={1}/>
                 </Form.Item>
                 <Form.Item name="queCount" label="Number of Questions">
