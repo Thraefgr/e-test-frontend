@@ -45,7 +45,7 @@ export default function InventoryCard({test, own}) {
                     <Link to={`/exam/${testId?._id}`}><Button style={{backgroundColor:"green", color:"white"}}>Solve!</Button></Link>
                 </Flex>
             }
-            <Button onClick={handleRemove} style={{marginTop:"1rem", backgroundColor:"red", color:"white"}}>Remove this Test</Button>
+            <Button onClick={handleRemove} style={{marginTop:"1rem", backgroundColor:"red", color:"white"}}>Remove This Test</Button>
         </Card>
     );
 
