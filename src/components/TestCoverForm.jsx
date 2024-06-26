@@ -29,8 +29,11 @@ export default function TestCoverForm({value}) {
                 <Form.Item name="timeLimit" label="Time Limit(minutes)" required initialValue={test.timeLimit}>
                     <InputNumber size="large" onChange={handleTimeChange} value={test.timeLimit} min={1}/>
                 </Form.Item>
-                <Form.Item name="queCount" label="Number of Questions" required>
+                <Form.Item name="queCount" label="Number of Questions">
                     <Typography.Text >{test.questions.length}</Typography.Text>
+                </Form.Item>
+                <Form.Item name="totalPoints" label="Total Score">
+                    <Typography.Text >{test.questions.reduce((acc, question) => question.points + acc, 0)}</Typography.Text>
                 </Form.Item>
             </Form> 
         </Card>

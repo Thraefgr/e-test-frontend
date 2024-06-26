@@ -26,10 +26,12 @@ export default function NewCreation() {
             choice: ""
         }
         ],
+        totalPoints:10,
     })
 
     async function createTest() {
         test.queCount = test.questions.length;
+        test.totalPoints = test.questions.reduce((acc, question) => question.points + acc, 0);
         axios.post(`${LOCAL_URL}/mycreation`, test, {headers:{"Authorization":`Bearer ${token}`}})
         .then(() => {
             message.success("Come on, checkout your new creation! It is so exciting!");

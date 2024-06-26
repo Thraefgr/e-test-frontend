@@ -35,10 +35,10 @@ export default function InventoryCard({test, own}) {
             <Title level={2}>Results</Title>
             {
                 finishDate ?
-                <Flex vertical>
+                <Flex vertical gap="1rem">
                     <Text strong>Solved at: {dateConverter(finishDate)}</Text>
-                    <Text strong>Right Answers: {rightOnes}/{testId?.queCount}</Text>
-                    <Text strong>Final Score: {score}</Text>
+                    <Text strong>Right Answers: {rightOnes} / {testId?.queCount}</Text>
+                    <Text strong>Final Score: {score} / {testId?.totalPoints}</Text>
                 </Flex> :
                 <Flex vertical gap="1rem">
                     <Text>Looks like you have not even solved it yet! Go head and solve it tiger!!</Text>
